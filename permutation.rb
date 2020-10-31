@@ -1,6 +1,6 @@
 # 順列
-def permutation(array, counter_part=[], result = [])
-    if array.empty?
+def permutation(array, r, counter_part=[], result = [])
+    if r == counter_part.size || array.empty?
         result << counter_part
         return
     end
@@ -9,11 +9,11 @@ def permutation(array, counter_part=[], result = [])
         copy = array.dup
         copy.delete_at(i)
 
-        permutation(copy, counter_part.dup << v, result)
+        permutation(copy, r, counter_part.dup << v, result)
     end
 
     return result
 end
 
-hoge = permutation([1, 2, 3])
+hoge = permutation([1, 2, 3], 2)
 p hoge

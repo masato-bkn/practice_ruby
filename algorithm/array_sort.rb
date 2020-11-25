@@ -107,3 +107,26 @@ p a.dup.selection_sort
 p a.dup.insert_sort
 p a.dup.quit_sort
 p a.dup.shell_sort
+
+Benchmark.bm 10 do |r|
+    a = [*1..10000].shuffle
+    r.report "bouble_sort" do
+        a.dup.bouble_sort
+    end
+  
+    r.report "selection_sort" do
+        a.dup.selection_sort
+    end
+
+    r.report "insert_sort" do
+        a.dup.insert_sort
+    end
+
+    r.report "quit_sort" do
+        a.dup.quit_sort
+    end
+
+    r.report "shell_sort" do
+        a.dup.shell_sort
+    end
+end

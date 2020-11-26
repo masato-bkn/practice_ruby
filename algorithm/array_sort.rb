@@ -78,7 +78,7 @@ class Array
     def shell_sort
         len = self.size
 
-        h = 0
+        h = 1
         while h < len/9 
             h = h*3 + 1
         end

@@ -81,21 +81,21 @@ class Array
     # O(log2n)
     def shell_sort
         len = self.size
-        h = len/2
 
-        while 0 < h
-            (0...len).each do |i|
-                j = i - h
-        
-                while j >= 0
-                    if self[i] < self[j]
-                        self[j], self[i] = self[i], self[j]
-                    end
+        h = 0
+        while h < len/9 
+            h = h*3 + 1
+        end
+
+        while h > 0
+            (h...len).each do |i|
+                j = i
+                while j >= h and self[j-h] > self[j]
+                    self[j-h], self[j] = self[j], self[j-h]
                     j -= h
-                    i -= h
                 end
             end
-            h = h/2
+            h = h/3
         end
         self
     end

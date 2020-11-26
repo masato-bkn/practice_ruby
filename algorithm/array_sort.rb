@@ -43,14 +43,10 @@ class Array
         len = self.size
 
         (1...len).each do |i|
-            j = i - 1
-            # target = self[i]
-
-            while j >= 0
-                if self[i] < self[j]
-                    self[j], self[i] = self[i], self[j]
+            while i-1 >= 0
+                if self[i] < self[i-1]
+                    self[i-1], self[i] = self[i], self[i-1]
                 end
-                j -= 1
                 i -= 1
             end
         end

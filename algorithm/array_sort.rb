@@ -6,13 +6,18 @@ class Array
     def bouble_sort
         len = self.size
         (0...len).each do |i|
+            swapped = false
+
             (i+1...len).each do |j|
                 if self[j] < self[i]
                    tmp =  self[i]
                    self[i] = self[j]
                    self[j] = tmp
+                   swapped = true
                 end
-            end            
+            end    
+
+            break if !swapped
         end
         self
     end
@@ -95,6 +100,52 @@ class Array
         end
         self
     end
+
+    def merge_sort
+        len = self.size
+
+        return self if len <= 1
+
+        mid = len/2
+        left = self.take(mid)
+        right = self.drop(mid)
+
+        # p "#######"
+        # p left, right
+        # p "#######"
+
+
+        sorted_left = left.merge_sort
+        sorted_right = right.merge_sort
+
+        # p "#######"
+        # p sorted_left, sorted_right
+        # p "#######"
+
+        merge(sorted_left, sorted_right)
+    end
+
+    private
+
+    def merge(left_ary, right_ary)
+        if right_ary.empty?
+            return left_ary
+          end
+      
+          if left_ary.empty?
+            return right_ary
+          end
+
+        smallest = if left_ary.first < right_ary.first
+            left_ary.shift
+        else
+            right_ary.shift
+        end
+
+        recursive = merge(left_ary, right_ary)
+
+        [smallest].concat(recursive)
+    end
 end
 
 a = [34, 6, 99, 43, 67, 37, 100, 87, 5, 25, 85, 19, 63, 9, 1, 35]
@@ -103,9 +154,10 @@ p a.dup.selection_sort
 p a.dup.insert_sort
 p a.dup.quit_sort
 p a.dup.shell_sort
+p a.dup.merge_sort
 
 Benchmark.bm 10 do |r|
-    a = [*1..10000].shuffle
+    a = [*1..1000].shuffle
     r.report "bouble_sort" do
         a.dup.bouble_sort
     end
@@ -124,5 +176,9 @@ Benchmark.bm 10 do |r|
 
     r.report "shell_sort" do
         a.dup.shell_sort
+    end
+
+    r.report "merge_sort" do
+        a.dup.merge_sort
     end
 end

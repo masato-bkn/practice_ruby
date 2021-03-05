@@ -110,17 +110,17 @@ class Array
         left = self.take(mid)
         right = self.drop(mid)
 
-        # p "#######"
-        # p left, right
-        # p "#######"
+        p "#######"
+        p left, right
+        p "#######"
 
 
         sorted_left = left.merge_sort
         sorted_right = right.merge_sort
 
-        # p "#######"
-        # p sorted_left, sorted_right
-        # p "#######"
+        p "#######"
+        p sorted_left, sorted_right
+        p "#######"
 
         merge(sorted_left, sorted_right)
     end
